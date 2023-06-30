@@ -10,15 +10,17 @@ PRIVACY_NOTICE_LINK = (By.CSS_SELECTOR,"a[href='https://www.amazon.com/privacy']
 @given('Open Amazon T&C page')
 def open_amazon(context):
     context.driver.get('https://www.amazon.com/gp/help/customer/display.html/ref=ap_register_notification_condition_of_use?ie=UTF8&nodeId=508088')
-
+    sleep(2)
 
 @when('Store original windows')
 def click_store_original_window(context):
     context.driver.myorgwindow=context.driver.current_window_handle
+    sleep(4)
 
 @when('Click on Amazon Privacy Notice link')
 def click_amazon_privacy_notice_link(context):
         context.driver.find_element(*PRIVACY_NOTICE_LINK).click()
+        sleep(3)
 
         # context.driver.wait.until(EC.new_window_is_opened(amazon_empty_cart_open))
 
@@ -26,18 +28,22 @@ def click_amazon_privacy_notice_link(context):
 def switch_new_open_window(context):
     new_window=context.driver.window_handles[1]
     context.driver.switch_to.window(new_window)
+    sleep(3)
 
 @then('Verify Amazon Privacy Notice page is opened')
 def verify_amazon_privacy_notice_page(context):
    context.driver.find_element(*NEW_WINDOW)
+   sleep(3)
 
 
 @then('User can close new window')
 def user_close_new_window(context):
     context.driver.close()
+    sleep(3)
 
 
 @then('switch back to original window')
 def switch_back_original_window(context):
     original_window=context.driver.window_handles[0]
     context.driver.switch_to.window(context.driver.myorgwindow)
+    sleep(5)
